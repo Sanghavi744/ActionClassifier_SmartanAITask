@@ -1,4 +1,4 @@
-# 🏋️ Gym Action Classifier
+# 🏋️Action Classifier
 
 This project implements a video-based action recognition system that classifies gym workout videos into one of three categories: **Bicep Curl**, **Lateral Raise**, or **Squat**. It uses a pre-trained 3D CNN model (R3D-18) and provides a simple Flask web interface for video upload and prediction.
 
