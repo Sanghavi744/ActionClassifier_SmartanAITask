@@ -10,7 +10,7 @@
       padding-top: 50px;
     }
     .container {
-      max-width: 650px;
+      max-width: 700px;
       margin: auto;
       padding: 30px;
       background: white;
@@ -21,6 +21,14 @@
       font-size: 1.25rem;
       padding: 0.75rem 1.25rem;
     }
+    video {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    h5 a {
+      font-size: 0.95rem;
+    }
   </style>
 </head>
 <body>
@@ -29,7 +37,7 @@
 
     <form method="post" enctype="multipart/form-data">
       <div class="mb-3">
-        <label for="file" class="form-label">Upload a short video (.mp4 or .mov)</label>
+        <label for="file" class="form-label">📤 Upload a short video (.mp4 or .mov)</label>
         <input class="form-control" type="file" name="file" id="file" required>
       </div>
       <button type="submit" class="btn btn-primary">Classify Exercise</button>
@@ -37,16 +45,24 @@
 
     {% if prediction %}
       <hr>
-      <h4 class="mt-4">✅ Detected Action:</h4>
+      <h4 class="mt-4">✅ Detected Exercise:</h4>
       <span class="badge bg-success badge-result">{{ prediction }}</span>
 
+      {% if video_url %}
+        <h5 class="mt-4">🎥 Uploaded Video:</h5>
+        <video controls autoplay muted>
+          <source src="{{ video_url }}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      {% endif %}
+
       {% if suggestions %}
-        <div class="mt-4">
+        <div class="mt-4 text-start">
           <h5>💡 Similar Exercises to Try:</h5>
           <ul class="list-group">
-            {% for name, link in suggestions %}
+            {% for name, url in suggestions %}
               <li class="list-group-item">
-                <a href="{{ link }}" target="_blank">{{ name }}</a>
+                <a href="{{ url }}" target="_blank">{{ name }}</a>
               </li>
             {% endfor %}
           </ul>
