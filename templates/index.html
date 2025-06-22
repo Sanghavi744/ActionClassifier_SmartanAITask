@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Action Classifier</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f8f9fa;
+      padding-top: 50px;
+    }
+    .container {
+      max-width: 650px;
+      margin: auto;
+      padding: 30px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    .badge-result {
+      font-size: 1.25rem;
+      padding: 0.75rem 1.25rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container text-center">
+    <h2 class="mb-4">🏋️‍♀️ Action Classifier</h2>
+
+    <form method="post" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="file" class="form-label">Upload a short video (.mp4 or .mov)</label>
+        <input class="form-control" type="file" name="file" id="file" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Classify Exercise</button>
+    </form>
+
+    {% if prediction %}
+      <hr>
+      <h4 class="mt-4">✅ Detected Action:</h4>
+      <span class="badge bg-success badge-result">{{ prediction }}</span>
+
+      {% if suggestions %}
+        <div class="mt-4">
+          <h5>💡 Similar Exercises to Try:</h5>
+          <ul class="list-group">
+            {% for name, link in suggestions %}
+              <li class="list-group-item">
+                <a href="{{ link }}" target="_blank">{{ name }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</body>
+</html>
